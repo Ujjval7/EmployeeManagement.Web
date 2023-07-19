@@ -1,0 +1,66 @@
+<div mat-dialog-title>
+    <h1>EmployeeAddress Form</h1>
+</div>
+<form [formGroup]="employeeAddressForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row1">
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="employeeId" placeholder="Select Employee">
+                    <mat-option value="{{employee.id}}" *ngFor="let employee of Employees">
+                        {{employee.firstName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('employeeId', 'required')">Select Employee</mat-error>
+            </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <textarea matInput type="text" placeholder="address" formControlName="address"></textarea>
+                        <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-select formControlName="addressTypeId" placeholder="Select AddressType">
+                            <mat-option value="{{addressType.id}}" *ngFor="let addressType of AddressTypes">
+                                {{addressType.addressTypes}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="hasError('addressTypeId', 'required')">Select AddressType</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+        <div class="row1">
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="countryId" placeholder="Select Country">
+                    <mat-option value="{{country.id}}" *ngFor="let country of Countrys">
+                        {{country.countryName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('countryId', 'required')">Select Country</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="stateId" placeholder="Select state">
+                    <mat-option value="{{state.id}}" *ngFor="let state of States">
+                        {{state.stateName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('stateId', 'required')">Select state</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="cityId" placeholder="Select city">
+                    <mat-option value="{{city.id}}" *ngFor="let city of Cities">
+                        {{city.cityName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('cityId', 'required')">Select city</mat-error>
+            </mat-form-field>    
+
+        </div>
+    </div> 
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="!employeeAddressForm.valid">{{data ? 'Update' : 'Save'}}</button>
+    </div>
+</form>

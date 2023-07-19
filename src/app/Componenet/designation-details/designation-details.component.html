@@ -1,0 +1,20 @@
+<div mat-dialog-title>
+    <h1>Designaton Form</h1>
+</div>
+<form [formGroup]="designationForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row1">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Designation</mat-label>
+                <input matInput placeholder="Enter Designation Name" formControlName="designationName">
+                <mat-error *ngIf="hasError('designationName', 'required')">Designation Name is Required</mat-error>
+            </mat-form-field>
+        
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary"  [disabled]="!designationForm.valid" type="submit">{{data ? 'Update' : 'Save'}}</button>
+    </div>
+</form>

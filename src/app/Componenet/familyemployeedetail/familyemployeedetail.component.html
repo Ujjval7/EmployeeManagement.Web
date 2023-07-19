@@ -1,0 +1,63 @@
+<div mat-dialog-title>
+    <h1>EmployeeFamily Form</h1>
+  </div>
+  <form [formGroup]="employeefamilyForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+      <div class="row1">
+
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="employeeId" placeholder="Select Employee">
+              <mat-option value="{{employee.id}}" *ngFor="let employee of employee">
+                {{employee.firstName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('employeeId', 'required')">Select Employee</mat-error>
+          </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>FirstName:</mat-label>
+          <input matInput type="text" placeholder="Enter first name" formControlName="firstName">
+          <mat-error *ngIf="hasError('firstName', 'required')">First Name is Required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>MiddleName:</mat-label>
+          <input matInput type="text" placeholder="Enter middle name" formControlName="middleName">
+          <mat-error *ngIf="hasError('middleName', 'required')">Middle Name is Required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>LastName:</mat-label>
+          <input matInput type="text" placeholder="Enter last name" formControlName="lastName">
+          <mat-error *ngIf="hasError('lastName', 'required')">Last Name is Required</mat-error>
+        </mat-form-field>
+  
+      </div>
+            
+      <mat-form-field appearance="outline">
+        <mat-label>DOB:</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="dob" formControlName="dob">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="hasError('startDate', 'required')">Choose DOB</mat-error>
+      </mat-form-field>
+  
+      <div class="row1">
+        <mat-form-field appearance="outline">
+          <mat-select formControlName="relationId" placeholder="Select Relation">
+            <mat-option value="{{employeeRelation.id}}" *ngFor="let employeeRelation of relation">
+              {{employeeRelation.relation}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('relationId', 'required')">Select Relation</mat-error>
+        </mat-form-field>
+ 
+      </div>
+  
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">{{data ? 'Update' : 'Save'}}</button>
+    </div>
+  </form>
